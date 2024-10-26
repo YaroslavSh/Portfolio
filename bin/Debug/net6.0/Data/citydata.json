@@ -1,0 +1,68 @@
+{
+  "тула": {
+    "toponyms": {
+      "nom": "Тула",
+      "gen": "Тулы",
+      "dat": "Туле",
+      "in_dat": "в Туле",
+      "acc": "Тулу",
+      "instr": "Тулой",
+      "prep": "Туле",
+      "nom_sg_m": "Тульский",
+      "nom_sg_f": "Тульская",
+      "gen_sg_f": "Тульской",
+      "gen_sg_m": "Тульского",
+      "acc_sg_f": "Тульскую",
+      "dat_sg_m": "Тульскому",
+      "nom_pl": "Тульские",
+      "acc_pl": "Тульские",
+      "gen_pl": "Тульских",
+      "prep_pl": "Тульских",
+      "dat_pl": "Тульским",
+      "instr_pl": "Тульскими"
+    },
+    "tel": "+7 (902) 904-64-52",
+    "tel_href": "tel:+79639398852",
+    "open_hours": "9:00-18:00 | Пн.-Пт.",
+    "open_hours_m_data": "Mo-Fr 09:00-18:00",
+    "mail": "ecoplaza.tula@mail.ru",
+    "mail_href": "mailto:ecoplaza.tula@mail.ru",
+    "region": 71,
+    "address_street": "проспект Ленина 102Б, этаж 3",
+    "info": "Другие данные"
+  },
+
+  "москва": {
+    "toponyms": {
+      "nom": "Москва",
+      "gen": "Москвы",
+      "dat": "Москве",
+      "in_dat": "в Москве",
+      "acc": "Москву",
+      "instr": "Москвой",
+      "prep": "Москве",
+      "nom_sg_m": "Московский",
+      "nom_sg_f": "Московская",
+      "gen_sg_f": "Московской",
+      "gen_sg_m": "Московского",
+      "acc_sg_f": "Московскую",
+      "dat_sg_m": "Московскому",
+      "nom_pl": "Московские",
+      "acc_pl": "Московские",
+      "gen_pl": "Московских",
+      "prep_pl": "Московских",
+      "dat_pl": "Московским",
+      "instr_pl": "Московскими"
+    },
+    "tel": "+7 (905) 118-18-56",
+    "tel_href": "tel:+79051181856",
+    "open_hours": "9:00-19:00 | Пн.-Пт.",
+    "open_hours_m_data": "Mo-Fr 09:00-19:00",
+    "mail": "msk@ecoplaza.pro",
+    "mail_href": "mailto:msk@ecoplaza.pro",
+    "region": 77,
+    "address_street": "Варшавское шоссе 125Дк2, этаж 2",
+    "info": "Другие данные"
+  }
+
+}

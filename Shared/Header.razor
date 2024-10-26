@@ -1,0 +1,64 @@
+﻿@inject SubdomainService SubdomainService
+@inject NavigationManager Navigation
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+        <div class="logo me-auto d-flex" itemscope itemtype="@(string.IsNullOrEmpty(SubdomainService.Subdomain) ? "https://schema.org/Organization" : "https://schema.org/LocalBusiness")">
+            <NavLink href="" Match="NavLinkMatch.All"><img itemprop="logo" class="img__main__logo" src="img/logo.svg" alt="@ContactDataClass.Brand()" height="49"></NavLink>
+            <a class="brand-text" itemprop="name url" href="@($"https://{new Uri(Navigation.Uri).Host}")">Экологические услуги РФ</a>
+            @*Uncomment below if you prefer to use an image logo*@
+            @*<NavLink href="" class="logo me-auto"><img src="img/logo.png" alt="" class="img-fluid"></NavLink>*@
+        </div>
+        <nav id="navbar" class="navbar order-last order-lg-0 @NavMenuCssClass">
+            <ul @onclick="NavMenu">
+                <li><NavLink class="nav-link scrollto" href="#hero" Match="NavLinkMatch.All">Главная</NavLink></li>
+                <li><NavLink class="nav-link scrollto" href="#about">О нас</NavLink></li>
+                <li><NavLink class="nav-link scrollto" href="#services">Услуги и цены</NavLink></li>
+                @*<li><a class="nav-link scrollto" href="#departments">ОНВОС</a></li>*@
+                <li><NavLink class="nav-link scrollto" href="#clients">Заказчики</NavLink></li>
+                @*<li class="dropdown"><a href="#"><span>Сервисы</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                <li><a href="#">Drop Down 1</a></li>
+                <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                <li><a href="#">Deep Drop Down 1</a></li>
+                <li><a href="#">Deep Drop Down 2</a></li>
+                <li><a href="#">Deep Drop Down 3</a></li>
+                <li><a href="#">Deep Drop Down 4</a></li>
+                <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+                </li>
+                <li><a href="#">Drop Down 2</a></li>
+                <li><a href="#">Drop Down 3</a></li>
+                <li><a href="#">Drop Down 4</a></li>
+                </ul>
+                </li>*@
+                <li><NavLink class="nav-link scrollto" href="#contact">Контакты</NavLink></li>
+            </ul>
+            <i class="bi mobile-nav-toggle @ToggleMenuCssClass" @onclick="ToggleNavMenu"></i>
+        </nav>
+
+        @*<a href="#appointment" class="appointment-btn scrollto me-md-4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Коммерческое предложение"><span class="d-none d-md-inline">Запросить</span> КП</a>*@
+        <button class="btn-primary appointment-btn me-md-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offCanvasAppointment" aria-controls="offCanvasAppointment" title="Коммерческое предложение"><span class="d-none d-md-inline">Запросить</span> КП</button>
+    </div>
+</header>
+
+<AnchorNavigation />
+<JsIntegrator />
+
+@code {
+    private bool collapseNavMenu = false;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "navbar-mobile" : null;
+    private string? ToggleMenuCssClass => collapseNavMenu ? "bi-x" : "bi-list";
+
+    private void NavMenu()
+    {
+        if (collapseNavMenu)
+            collapseNavMenu = false;
+    }
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

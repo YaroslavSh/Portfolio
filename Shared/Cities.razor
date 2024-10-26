@@ -1,0 +1,211 @@
+﻿@using System.Text.Json
+@*@inject NavigationManager Navigation*@
+@inject SubdomainService SubdomainService
+@inject Ecoplaza.Data.CityDataService CityDataService
+
+@*Выводим результат*@
+@((MarkupString)GetSelectedData(Key))
+
+@*Пример доступа к компоненту*@
+@*<Cities Key="toponyms.nom" Default="По умолчанию" />*@
+@*<Cities Key="tel" Default="Телефон не указан" />*@
+
+@code {
+    [Parameter] public string Key { get; set; }
+    [Parameter] public string Default { get; set; }
+
+    private JsonElement? selectedData;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var subdomain = SubdomainService.Subdomain;
+
+        if (!string.IsNullOrEmpty(subdomain))
+        {
+            selectedData = CityDataService.GetCityData(subdomain);
+        }
+
+        // Если поддомена нет или данные для поддомена не найдены, очищаем selectedData
+        if (selectedData == null)
+        {
+            selectedData = null;
+        }
+    }
+
+    private string GetSelectedData(string key)
+    {
+        if (selectedData == null) return Default;
+
+        JsonElement currentData = selectedData.Value;
+
+        if (currentData.ValueKind == JsonValueKind.String)
+        {
+            return currentData.GetString();
+        }
+
+        var keys = key.Split('.');
+        foreach (var k in keys)
+        {
+            if (currentData.ValueKind == JsonValueKind.Object && currentData.TryGetProperty(k, out JsonElement nextElement))
+            {
+                currentData = nextElement;
+            }
+            else
+            {
+                return Default;
+            }
+        }
+
+        return currentData.ToString();
+    }
+}
+
+
+@*Альтернативный код - делает тоже самое но без использования сервиса SubdomainService что приводит к повторным однотипным операциям*@
+@*@code {
+    [Parameter] public string Key { get; set; }
+    [Parameter] public string Default { get; set; }
+
+    private string subdomain;
+    private JsonElement? selectedData;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var uri = new Uri(Navigation.Uri);
+        var host = uri.Host.ToLower();
+
+        var idn = new System.Globalization.IdnMapping();
+        var decodedHost = idn.GetUnicode(host);
+
+        string baseDomain;
+        if (decodedHost.Contains("localhost"))
+        {
+            baseDomain = "localhost";
+        }
+        else
+        {
+            var parts = decodedHost.Split('.');
+            baseDomain = parts.Length > 2
+                ? string.Join(".", parts.Skip(1))
+                : decodedHost;
+        }
+
+        if (!decodedHost.Equals(baseDomain, StringComparison.OrdinalIgnoreCase))
+        {
+            subdomain = decodedHost.Replace($".{baseDomain}", "");
+            selectedData = CityDataService.GetCityData(subdomain);
+        }
+
+        // Если поддомена нет или данные для поддомена не найдены, очищаем selectedData
+        if (string.IsNullOrEmpty(subdomain) || selectedData == null)
+        {
+            selectedData = null;
+        }
+    }
+
+    private string GetSelectedData(string key)
+    {
+        if (selectedData == null) return Default;
+
+        JsonElement currentData = selectedData.Value;
+
+        if (currentData.ValueKind == JsonValueKind.String)
+        {
+            return currentData.GetString();
+        }
+
+        var keys = key.Split('.');
+        foreach (var k in keys)
+        {
+            if (currentData.ValueKind == JsonValueKind.Object && currentData.TryGetProperty(k, out JsonElement nextElement))
+            {
+                currentData = nextElement;
+            }
+            else
+            {
+                return Default;
+            }
+        }
+
+        return currentData.ToString();
+    }
+}*@
+
+
+
+@*@code {
+    [Parameter] public string Key { get; set; }
+    [Parameter] public string Default { get; set; }
+
+    private string subdomain;
+    private JsonElement? selectedData;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var uri = new Uri(Navigation.Uri);
+        var host = uri.Host.ToLower();
+
+        var idn = new System.Globalization.IdnMapping();
+        var decodedHost = idn.GetUnicode(host);
+
+        string baseDomain;
+        if (decodedHost.Contains("localhost"))
+        {
+            baseDomain = "localhost";
+        }
+        else
+        {
+            var parts = decodedHost.Split('.');
+            baseDomain = parts.Length > 2
+                ? string.Join(".", parts.Skip(1))
+                : decodedHost;
+        }
+
+        if (!decodedHost.Equals(baseDomain, StringComparison.OrdinalIgnoreCase))
+        {
+            subdomain = decodedHost.Replace($".{baseDomain}", "");
+            selectedData = CityDataService.GetCityData(subdomain);
+        }
+
+        if (string.IsNullOrEmpty(subdomain) || selectedData == null)
+        {
+            if (!string.IsNullOrEmpty(Default))
+            {
+                selectedData = JsonDocument.Parse($"\"{Default}\"").RootElement;
+            }
+            else
+            {
+                selectedData = null;
+            }
+        }
+    }
+
+    private string GetSelectedData(string key)
+    {
+        if (selectedData == null) return Default;
+
+        JsonElement currentData = selectedData.Value;
+
+        if (currentData.ValueKind == JsonValueKind.String)
+        {
+            return currentData.GetString();
+        }
+
+        var keys = key.Split('.');
+        foreach (var k in keys)
+        {
+            if (currentData.ValueKind == JsonValueKind.Object && currentData.TryGetProperty(k, out JsonElement nextElement))
+            {
+                currentData = nextElement;
+            }
+            else
+            {
+                return string.IsNullOrEmpty(Default) ? string.Empty : Default;
+            }
+        }
+
+        return currentData.ToString();
+    }
+}*@
+
+

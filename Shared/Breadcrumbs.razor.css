@@ -1,0 +1,97 @@
+﻿/*--------------------------------------------------------------
+# Breadcrumbs
+--------------------------------------------------------------*/
+.breadcrumbs {
+    padding: 20px 0;
+    background-color: #f1f7fd;
+    min-height: 40px;
+    margin-top: 120px;
+}
+
+    .breadcrumbs h2 {
+        font-size: 24px;
+        font-weight: 300;
+        margin: 0;
+    }
+
+    .breadcrumbs .subdivisions a {
+        padding: 8px 10px;
+    }
+
+        .breadcrumbs .subdivisions a.active {
+            color: var(--contrast-color);
+            background-color: var(--accent-color);
+        }
+
+        .breadcrumbs .subdivisions a:hover {
+            color: var(--accent-color);
+            background-color: transparent;
+            transition: .3s;
+        }
+
+    .breadcrumbs .subdivisions a {
+        color: inherit;
+    }
+
+    .breadcrumbs strong {
+        font-weight: 600;
+        font-size: .98em;
+    }
+
+    .breadcrumbs ol {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+    }
+
+        .breadcrumbs ol li:not(ul li) + li {
+            padding-left: 6px;
+        }
+
+        .breadcrumbs ol li:not(ul li) + li::before {
+            display: inline-block;
+            padding-right: 6px;
+            color: #6c757d;
+            content: "/";
+        }
+
+@media (max-width: 1399.98px) {
+    .breadcrumbs .d-flex {
+        display: block !important;
+    }
+
+    .breadcrumbs h2, .breadcrumbs .subdivisions {
+        margin: 0 0 15px 0;
+    }
+
+        .breadcrumbs .subdivisions a {
+            padding: 6px 8px;
+            font-size: .9em;
+        }
+}
+
+@media (max-width: 767.98px) {
+    .breadcrumbs h2, .breadcrumbs .subdivisions {
+        margin: 0 0 10px 0;
+    }
+
+        .breadcrumbs .subdivisions a {
+            padding: 3px 6px;
+            font-size: .8em;
+        }
+
+    .breadcrumbs h2 {
+        font-size: 1.25em;
+    }
+
+    .breadcrumbs ol {
+        display: block;
+    }
+
+        .breadcrumbs ol li:not(ul li) {
+            display: inline-block;
+        }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "outputFileName": "wwwroot/css/bundle.min.css",
+    "inputFiles": [
+      "wwwroot/css/basic-style.css",
+      "wwwroot/css/template-style.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/bundle.min.js",
+    "inputFiles": [
+      "wwwroot/js/main.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/test.min.js",
+    "inputFiles": [
+      "wwwroot/js/test.js"
+    ]
+  }
+]
+

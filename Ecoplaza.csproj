@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifierPlus" Version="5.3.0" />
+    <PackageReference Include="MailKit" Version="4.4.0" />
+  </ItemGroup>
+
+  <!-- Добавляем Target для замены файла appsettings.json -->
+  <Target Name="ReplaceAppSettings" AfterTargets="Publish">
+    <Message Importance="high" Text="Замена appsettings.json в зависимости от конфигурации" />
+    <Copy Condition="'$(Configuration)' == 'Release'" SourceFiles="appsettings.Production.json" DestinationFiles="$(PublishDir)appsettings.json" OverwriteReadOnlyFiles="true" />
+
+    <Copy Condition="'$(Configuration)' == 'Debug'" SourceFiles="appsettings.Development.json" DestinationFiles="$(PublishDir)appsettings.json" OverwriteReadOnlyFiles="true" />
+  </Target>
+  
+</Project>
+

@@ -1,0 +1,37 @@
+﻿@using Ecoplaza.Data
+@inject SubdomainService SubdomainService
+
+<div id="topbar" class="d-flex align-items-center fixed-top">
+    <div class="container d-flex justify-content-center justify-content-sm-between">
+        <address class="mb-0 contact-info d-flex align-items-center" itemscope itemtype="@(SubdomainService.IsSubdomain ? "https://schema.org/LocalBusiness" : "https://schema.org/Organization")">
+            @if (SubdomainService.IsSubdomain)
+            {
+                <i class="bi bi-geo-alt"></i>
+                <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <span itemprop="addressLocality">г. @CitiesService.Get("toponyms.nom")<span class="d-none d-xl-inline">,</span></span>
+                    <span class="d-none d-xl-inline" itemprop="streetAddress">@CitiesService.Get("address_street")</span>
+                </div>
+            }
+            else
+            {
+                @*Определить город через API, если есть в списке - вывести адрес*@
+            }
+            <i class="bi bi-clock"></i>
+            <span itemprop="openingHours" datetime="@CitiesService.Get("open_hours_m_data", ContactDataClass.OpenHoursMData())">@CitiesService.Get("open_hours", ContactDataClass.OpenHours())</span>
+            <i class="bi bi-telephone"></i>
+            <a itemprop="telephone" href="@CitiesService.Get("tel_href", ContactDataClass.PhoneHref())"><span class="d-none d-sm-inline">@CitiesService.Get("tel", ContactDataClass.Phone())</span><span class="d-sm-none d-inline strong-blue">Позвонить</span></a>
+            <i class="d-none d-md-inline bi bi-envelope"></i>
+            <a itemprop="email" class="d-none d-md-inline" href="@CitiesService.Get("mail_href", ContactDataClass.MailHref())">@CitiesService.Get("mail", ContactDataClass.Mail())</a>
+        </address>
+        <div class="d-none d-lg-flex social-links align-items-center">
+            <a class="item" href="@ContactDataClass.Skype()" target="_blank"><i class="fa-brands fa-skype"></i></a>
+            <a class="item" href="@ContactDataClass.Telegram()" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+            <a class="item" href="@ContactDataClass.WhatsApp()" target="_blank"><i class="fa-brands fa-square-whatsapp"></i></a>
+            <button class="shareButton item btn p-0" type="button"><i class="fa-solid fa-share-nodes"></i></button>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

@@ -1,0 +1,1077 @@
+﻿@page "/"
+@*Маршрут первой директивы page будет использован в канонической ссылке*@
+
+@using Ecoplaza.Data
+@using Microsoft.AspNetCore.Components
+
+@inject IJSRuntime JSRuntime
+@inject SubdomainService SubdomainService
+
+<PageTitle>@($"Экологические услуги {CitiesService.Get("toponyms.in_dat", "под ключ")}")</PageTitle>
+
+    <HeadContent>
+        <meta name="description" content="Разработка и согласование природоохранной документации для предприятий @(CitiesService.Get("toponyms.gen_sg_f", "различных сфер деятельности") + (SubdomainService.IsSubdomain ? " области" : "")). 📞 @ContactDataClass.PhoneShort()" />
+        <meta name="keywords" content="экологические услуги@(SubdomainService.IsSubdomain ? " " + CitiesService.Get("toponyms.nom") : "")" />
+        @*<meta name="keywords" content="экологические услуги@(CitiesService.Get("toponyms.nom") is { Length: > 0 } nom ? $" {nom}" : "")" />*@
+        <Canonical PageType="this.GetType()" />
+    </HeadContent>
+
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us section">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-4 d-flex align-items-stretch">
+                    <div class="content">
+                        <h2>Экологическое сопровождение</h2>
+                        <p>Помогаем соблюдать экологические нормы и стандарты для предприятий различных сфер деятельности.</p>
+                        <p><Typewriter1 /></p>
+                        <div class="text-center">
+                            <a href="#services" class="scrollto more-btn">Подобрать услугу <i class="bx bx-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                @*<p>@GetFirstPageRoute()</p>*@
+                @*<p>@GetPageRoutes().FirstOrDefault()</p>*@
+                @*<ul>
+            @foreach (var route in GetPageRoutes())
+            {
+            <li>@route</li>
+            }
+            </ul>*@
+
+                @*@code {
+            //private string GetFirstPageRoute()
+            //{
+            //    var route = this.GetType()
+            //    .GetCustomAttributes<Microsoft.AspNetCore.Components.RouteAttribute>(false)
+            //    .FirstOrDefault();
+
+            //    // Если маршрут найден, возвращаем его шаблон, иначе возвращаем null
+            //    return route?.Template;
+            //}
+
+
+
+            //private IEnumerable<string> GetPageRoutes()
+            //{
+            //    var routes = this.GetType()
+            //    .GetCustomAttributes<Microsoft.AspNetCore.Components.RouteAttribute>(false)
+            //    .Select(r => r.Template);
+
+
+            //    return routes;
+            //}
+
+
+
+            }*@
+
+
+                <div class="col-lg-8 d-flex align-items-stretch">
+                    <div class="icon-boxes d-flex flex-column justify-content-center">
+                        <div class="row">
+                            <div class="col-xl-4 d-flex align-items-stretch">
+                                <div class="icon-box mt-4 mt-xl-0">
+                                    <i class="fa-solid fa-book-bookmark"></i>
+                                    <h3>Экологическое проектирование</h3>
+                                    @*<p>Разработка проектной документации природоохранного назначения</p>*@
+                                    <p>Разработка проектной документации<br /><strong>от 35 000 руб.</strong></p>
+                                   <a href="#appointment" class="py-2 btn btn-primary scrollto">Заказать</a>
+                        </div>
+                            </div>
+                            <div class="col-xl-4 d-flex align-items-stretch">
+                                <div class="icon-box mt-4 mt-xl-0">
+                                    <i class="fa-solid fa-file-signature"></i>
+                                    <h3>Отчетность и документация</h3>
+                                    @*<p>Подготовка экологической документации для природопользователей</p>*@
+                                    <p>Подготовка экологической документации<br /><strong>от 6 000 руб.</strong></p>
+                                    <a href="#appointment" class="py-2 btn btn-primary scrollto">Заказать</a>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 d-flex align-items-stretch">
+                                <div class="icon-box mt-4 mt-xl-0">
+                                    <i class="fa-solid fa-user-group"></i>
+                                    <h3>Экологический аутсорсинг</h3>
+                                    @*<p>Комплексное экологическое обслуживание предприятий</p>*@
+                                    <p>Cопровождение предприятий<br /><strong>от 15 000 руб.</strong></p>
+                                    <a href="#appointment" class="py-2 btn btn-primary scrollto">Заказать</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End .content-->
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- End Why Us Section -->
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about section">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch position-relative">
+                    @*<a href="https://www.youtube.com/" class="glightbox play-btn mb-4"></a>*@
+                </div>
+
+                <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
+                    <h2>О компании</h2>
+                    <p>@(new MarkupString("Сотрудники компании " + ContactDataClass.Brand() + " задействованные в подготовке природоохранной документации имеют Университетское образование по специальности «Охрана окружающей среды и рациональное использование природных ресурсов», это позволяет нам выполнять свою работу профессионально."))</p>
+
+                <div class="icon-box">
+                    <div class="icon"><i class="fa-solid fa-fingerprint"></i></div>
+                    <h3 class="title">О Подходе</h3>
+                    <p class="description">Небольшой штат <strong>экологической компании</strong> позволяет предоставить персональный подход к вашему предприятию, обеспечивая индивидуальную ответственность и взаимопонимание.</p>
+                </div>
+
+                <div class="icon-box">
+                    <div class="icon"><i class="fa-regular fa-handshake"></i></div>
+                    <h3 class="title">О Доверии</h3>
+                    @*<h4 class="title"><a href="">О Доверии</a></h4>*@
+                    <p class="description">Мы <span class="fw-bold">соблюдаем прозрачность финансовых отношений</span> и выполняем работы на высоком уровне. Но если по стечению обстоятельств произошло какое-либо упущение, мы внесём необходимые корректировки за свой счёт.</p>
+                </div>
+
+                <div class="icon-box">
+                    <div class="icon"><i class="fa-regular fa-map"></i></div>
+                    <h3 class="title">@(SubdomainService.IsSubdomain ? CitiesService.Get("toponyms.nom") + " и не только" : "О Географии")</h3>
+                    <p class="description">Мы @(new MarkupString(SubdomainService.IsSubdomain ? "работаем с предприятиями по всей России" : "<strong>работаем с предприятиями по всей России</strong>")), предлагая разработку документации независимо от вашего местоположения. Экологическое проектирование и отчетность выполняются удалённо, и направляется на <strong>согласование в органы исполнительной власти @(new MarkupString(SubdomainService.IsSubdomain ? CitiesService.Get("toponyms.gen_sg_f") + " области" : "")) по ЭДО</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End About Section -->
+<!-- ======= Counts Section ======= -->
+<section id="counts" class="counts section">
+    <div class="container">
+
+        <div class="section-title pb-5">
+            <h2>Оказано экологических услуг на @DateTime.Now.Year.ToString()г.</h2>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-3 col-md-6">
+                <div class="count-box">
+                    <i class="fas fa-award"></i>
+                    <h3 class="fw-bold mt-2 mb-0">Государственные<br>учреждения</h3>
+                    <span class="purecounter">87</span>
+                    <p>Экологических услуг</p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
+                <div class="count-box">
+                    <i class="fa fa-industry"></i>
+                    <h3 class="fw-bold mt-2 mb-0">Производственные<br>предприятия</h3>
+                    <span class="purecounter">16</span>
+                    <p>Экологических услуг</p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+                <div class="count-box">
+                    <i class="fa fa-coffee"></i>
+                    <h3 class="fw-bold mt-2 mb-0">Сфера торговли<br>и обслуживания</h3>
+                    <span class="purecounter">159</span>
+                    <p>Экологических услуг</p>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+                <div class="count-box">
+                    <i class="fa fa-building"></i>
+                    <h3 class="fw-bold mt-2 mb-0">Строительство<br>и эксплуатация</h3>
+                    <span class="purecounter">14</span>
+                    <p>Экологических услуг</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- End Counts Section -->
+<!-- ======= Services Section ======= -->
+<section id="services" class="services section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Популярные услуги</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-4 col-lg-6 d-flex align-items-stretch">
+                <div class="icon-box" itemscope itemtype="https://schema.org/Product">
+                    <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" data-bs-toggle="tooltip" data-bs-placement="top" title="Минимальная стоимость услуги">
+                        <span itemprop="price" content="2000.00">от 2 000</span>
+                        <span itemprop="priceCurrency" content="RUB">₽</span>
+                        <link itemprop="availability" href="https://schema.org/InStock">
+                    </div>
+                    <div class="icon-box-title">
+                        <div class="icon"><i class="fa-solid fa-trash" aria-hidden="true"></i></div>
+                        <h3 itemprop="name"><a href="">Паспортизация отходов</a></h3>
+                    </div>
+                    <p itemprop="description">
+                        Подготовка паспортов для отходов I-IV класса опасности.
+                        <span class="notes" itemprop="additionalDescription">Для некоторых видов отходов могут потребоваться сведения об их количественно-химическом составе. Лабораторные исследования оплачиваются отдельно.</span>
+                    </p>
+                    <div class="text-center py-3">
+                        <a href="#appointment" class="scrollto services-btn">Запросить КП</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-6 d-flex align-items-stretch mt-4 mt-xl-0">
+                <div class="icon-box" itemscope itemtype="https://schema.org/Product">
+                    <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" data-bs-toggle="tooltip" data-bs-placement="top" title="Минимальная стоимость услуги">
+                        <span itemprop="price" content="10000.00">от 10 000</span>
+                        <span itemprop="priceCurrency" content="RUB">₽</span>
+                        <link itemprop="availability" href="https://schema.org/InStock">
+                    </div>
+                    <div class="icon-box-title">
+                        <div class="icon"><i class="fa-solid fa-file-circle-plus" aria-hidden="true"></i></div>
+                        <h3 itemprop="name"><a href="">Постановка на учет объектов НВОС</a></h3>
+                    </div>
+                    <p itemprop="description">
+                        Постановка на государственный учет объектов негативное воздействия на ОС.
+                        <span class="notes" itemprop="additionalDescription">Стоимость постановки на учет зависит от вида хозяйственной деятельности предприятия и типа источников НВОС.</span>
+                    </p>
+                    <div class="text-center py-3">
+                        <a href="#appointment" class="scrollto services-btn">Запросить КП</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-6 d-flex align-items-stretch mt-4 mt-xl-0">
+                <div class="icon-box" itemscope itemtype="https://schema.org/Product">
+                    <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" data-bs-toggle="tooltip" data-bs-placement="top" title="Минимальная стоимость услуги">
+                        <span itemprop="price" content="6000.00">от 6 000</span>
+                        <span itemprop="priceCurrency" content="RUB">₽</span>
+                        <link itemprop="availability" href="https://schema.org/InStock">
+                    </div>
+                    <div class="icon-box-title">
+                        <div class="icon"><i class="fa-solid fa-file-lines" aria-hidden="true"></i></div>
+                        <h3 itemprop="name"><a href="">Экологическая отчетность</a></h3>
+                    </div>
+                    <p itemprop="description">
+                        Подготовка отчётности природоохранного назначения.
+                        <span class="notes" itemprop="additionalDescription">Сформируем любой вид экологической отчетности в кабинете природопользователя. Подготовка отчетов осуществляется онлайн.</span>
+                    </p>
+                    <div class="text-center py-3">
+                        <a href="#appointment" class="scrollto services-btn">Запросить КП</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-6 d-flex align-items-stretch mt-4">
+                <div class="icon-box" itemscope itemtype="https://schema.org/Product">
+                    <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" data-bs-toggle="tooltip" data-bs-placement="top" title="Минимальная стоимость услуги">
+                        <span itemprop="price" content="8000.00">от 8 000</span>
+                        <span itemprop="priceCurrency" content="RUB">₽</span>
+                        <link itemprop="availability" href="https://schema.org/InStock">
+                    </div>
+                    <div class="icon-box-title">
+                        <div class="icon"><i class="fa-solid fa-calculator" aria-hidden="true"></i></div>
+                        <h3 itemprop="name"><a href="">Декларация о&nbsp;плате&nbsp;за&nbsp;НВОС</a></h3>
+                    </div>
+                    <p itemprop="description">
+                        Подготовка декларации о плате за негативное воздействие на окружающую среду.
+                        <span class="notes" itemprop="additionalDescription">Оптимизация экологических платежей за счёт расчёта фактических показателей негативного воздействия. Декларация формируется в личном кабинете ФС РПН.</span>
+                    </p>
+                    <div class="text-center py-3">
+                        <a href="#appointment" class="scrollto services-btn">Запросить КП</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-6 d-flex align-items-stretch mt-4">
+                <div class="icon-box" itemscope itemtype="https://schema.org/Product">
+                    <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" data-bs-toggle="tooltip" data-bs-placement="top" title="Минимальная стоимость услуги">
+                        <span itemprop="price" content="35000.00">от 35 000</span>
+                        <span itemprop="priceCurrency" content="RUB">₽</span>
+                        <link itemprop="availability" href="https://schema.org/InStock">
+                    </div>
+                    <div class="icon-box-title">
+                        <div class="icon"><i class="fa-solid fa-book-bookmark" aria-hidden="true"></i></div>
+                        <h3 itemprop="name"><a href="">Экологическое проектирование</a></h3>
+                    </div>
+                    <p itemprop="description">
+                        Разработка и согласование проектной документации природоохранного назначения.
+                        <span class="notes" itemprop="additionalDescription">Со знанием дела разработанная проектная документация природоохранного назначения залог безопасной эксплуатации объектов НВОС.</span>
+                    </p>
+                    <div class="text-center py-3">
+                        <a href="#appointment" class="scrollto services-btn">Запросить КП</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-6 d-flex align-items-stretch mt-4">
+                <div class="icon-box" itemscope itemtype="https://schema.org/Product">
+                    <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" data-bs-toggle="tooltip" data-bs-placement="top" title="Минимальная стоимость услуги">
+                        <span itemprop="price" content="20000.00">от 20 000</span>
+                        <span itemprop="priceCurrency" content="RUB">₽</span>
+                        <link itemprop="availability" href="https://schema.org/InStock">
+                    </div>
+                    <div class="icon-box-title">
+                        <div class="icon"><i class="fa-solid fa-book" aria-hidden="true"></i></div>
+                        <h3 itemprop="name"><a href="">Разработка программы&nbsp;ПЭК</a></h3>
+                    </div>
+                    <p itemprop="description">
+                        Разработка программы производственного экологического контроля.
+                        <span class="notes" itemprop="additionalDescription">Программа ПЭК является обязательным документом природоохранного назначения для действующих объектов I, II и III категорий.</span>
+                    </p>
+                    <div class="text-center py-3">
+                        <a href="#appointment" class="scrollto services-btn">Запросить КП</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+            @if (servicesVisible)
+            {
+                <div class="col-xl-4 col-lg-6 d-flex align-items-stretch mt-4">
+                    <div class="icon-box" itemscope itemtype="https://schema.org/Product">
+                        <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" data-bs-toggle="tooltip" data-bs-placement="top" title="Минимальная стоимость услуги">
+                            <span itemprop="price" content="12000.00">от 12 000</span>
+                            <span itemprop="priceCurrency" content="RUB">₽</span>
+                            <link itemprop="availability" href="https://schema.org/InStock">
+                        </div>
+                        <div class="icon-box-title">
+                            <div class="icon"><i class="fa-solid fa-coins" aria-hidden="true"></i></div>
+                            <h3 itemprop="name"><a href="">Экологический сбор</a></h3>
+                        </div>
+                        <p itemprop="description">
+                            Расчет суммы экологического сбора с подготовкой комплекта документов.
+                            <span class="notes" itemprop="additionalDescription">Декларация о готовых товарах, отчетность о нормативах утилизации отходов и документ об уплате экологического сбора.</span>
+                        </p>
+                        <div class="text-center py-3">
+                            <a href="#appointment" class="scrollto services-btn">Запросить КП</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-6 d-flex align-items-stretch mt-4">
+                    <div class="icon-box" itemscope itemtype="https://schema.org/Product">
+                        <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" data-bs-toggle="tooltip" data-bs-placement="top" title="Минимальная стоимость услуги">
+                            <span itemprop="price" content="15000.00">от 15 000</span>
+                            <span itemprop="priceCurrency" content="RUB">₽</span>
+                            <link itemprop="availability" href="https://schema.org/InStock">
+                        </div>
+                        <div class="icon-box-title">
+                            <div class="icon"><i class="fa-solid fa-spell-check" aria-hidden="true"></i></div>
+                            <h3 itemprop="name"><a href="">Экологический аудит</a></h3>
+                        </div>
+                        <p itemprop="description">
+                            Профессиональная оценка полноты экологической документации.
+                            <span class="notes" itemprop="additionalDescription">Произведём комплексный анализ деятельности предприятия и состояния природоохранной документации.</span>
+                        </p>
+                        <div class="text-center py-3">
+                            <a href="#appointment" class="scrollto services-btn">Запросить КП</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-6 d-flex align-items-stretch mt-4">
+                    <div class="icon-box" itemscope itemtype="https://schema.org/Product">
+                        <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" data-bs-toggle="tooltip" data-bs-placement="top" title="Минимальная стоимость услуги">
+                            <span itemprop="price" content="10000.00">от 10 000</span>
+                            <span itemprop="priceCurrency" content="RUB">₽</span>
+                            <link itemprop="availability" href="https://schema.org/InStock">
+                        </div>
+                        <div class="icon-box-title">
+                            <div class="icon"><i class="fa-solid fa-user-group" aria-hidden="true"></i></div>
+                            <h3 itemprop="name"><a href="">Экологическое сопровождение</a></h3>
+                        </div>
+                        <p itemprop="description">
+                            Экологическое обслуживание предприятий на условиях абонентской платы.
+                            <span class="notes" itemprop="additionalDescription">Возьмем на себя ведение ежеквартальных и годовых журналов, подготовку и сдачу экологической отчётности, разработку инструкций.</span>
+                        </p>
+                        <div class="text-center py-3">
+                            <a href="#appointment" class="scrollto services-btn">Запросить КП</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-6 d-flex align-items-stretch mt-4">
+                    <div class="icon-box" itemscope itemtype="https://schema.org/Product">
+                        <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" data-bs-toggle="tooltip" data-bs-placement="top" title="Минимальная стоимость услуги">
+                            <span itemprop="price" content="40000.00">от 40 000</span>
+                            <span itemprop="priceCurrency" content="RUB">₽</span>
+                            <link itemprop="availability" href="https://schema.org/InStock">
+                        </div>
+                        <div class="icon-box-title">
+                            <div class="icon"><i class="fa-solid fa-volcano" aria-hidden="true"></i></div>
+                            <h3 itemprop="name"><a href="">Проект ПДВ (НДВ)</a></h3>
+                        </div>
+                        <p itemprop="description">
+                            Разработка и согласование проекта предельно допустимых выбросов.
+                            <span class="notes" itemprop="additionalDescription">Услуга включает разработку и согласование нормативов предельно-допустимых выбросов в органах исполнительной власти.</span>
+                        </p>
+                        <div class="text-center py-3">
+                            <a href="пдв" class="services-btn">Подробней</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-6 d-flex align-items-stretch mt-4">
+                    <div class="icon-box" itemscope itemtype="https://schema.org/Product">
+                        <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" data-bs-toggle="tooltip" data-bs-placement="top" title="Минимальная стоимость услуги">
+                            <span itemprop="price" content="25000.00">от 25 000</span>
+                            <span itemprop="priceCurrency" content="RUB">₽</span>
+                            <link itemprop="availability" href="https://schema.org/InStock">
+                        </div>
+                        <div class="icon-box-title">
+                            <div class="icon"><i class="fa-solid fa-list-check" aria-hidden="true"></i></div>
+                            <h3 itemprop="name"><a href="">Инвентаризация выбросов</a></h3>
+                        </div>
+                        <p itemprop="description">
+                            Проведение инвентаризация источников выбросов загрязняющих веществ.
+                            <span class="notes" itemprop="additionalDescription">Расчёт объемов выбросов в атмосферу и характеристик ИЗАВ в соответствии с требованиями законодательства и методических материалов.</span>
+                        </p>
+                        <div class="text-center py-3">
+                            <a href="#appointment" class="scrollto services-btn">Запросить КП</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-6 d-flex align-items-stretch mt-4">
+                    <div class="icon-box" itemscope itemtype="https://schema.org/Product">
+                        <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" data-bs-toggle="tooltip" data-bs-placement="top" title="Минимальная стоимость услуги">
+                            <span itemprop="price" content="400000.00">от 400 000</span>
+                            <span itemprop="priceCurrency" content="RUB">₽</span>
+                            <link itemprop="availability" href="https://schema.org/InStock">
+                        </div>
+                        <div class="icon-box-title">
+                            <div class="icon"><i class="fa-solid fa-industry" aria-hidden="true"></i></div>
+                            <h3 itemprop="name"><a href="">Разработка КЭР</a></h3>
+                        </div>
+                        <p itemprop="description">
+                            Разработка и согласование комплексного экологического разрешения (КЭР).
+                            <span class="notes" itemprop="additionalDescription">Разработка КЭР для предприятий I категории опасности, с целью подтверждения соблюдения экологических норм и стандартов.</span>
+                        </p>
+                        <div class="text-center py-3">
+                            <a href="#appointment" class="scrollto services-btn">Запросить КП</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (!servicesVisible)
+        {
+            <div class="mt-5 text-center">
+                <button type="button" class="btn btn-primary" @onclick="ShowServices">Показать ещё</button>
+            </div>
+        }
+
+        @if (servicesVisible)
+        {
+            <div class="other-service py-5">
+                <div class="section-title">
+                    <h4>Не нашли услугу?</h4>
+                    <p>Укажите в строке ниже искомую услугу</p>
+                </div>
+                <form id="formSearchService">
+                    <input id="searchServiceInput" type="search" @bind="SearchServiceInput" placeholder="Наименование услуги">
+                    <input id="moveValue" type="button" value="Узнать цену" @onclick="GetPrice">
+                </form>
+
+                <p class="pt-4 pb-3 text-center">Выбрать из подсказок:</p>
+
+                <div id="fastTips" class="fast-tips m-auto">
+                    @foreach (var service in Services)
+                    {
+                        <button type="button" class="btn tips-services-btn" @onclick="() => AddServiceToInput(service)">@service</button>
+                    }
+                </div>
+            </div>
+        }
+
+    </div>
+</section>
+<!-- End Services Section -->
+<!-- ======= Appointment Section ======= -->
+<ContactForm1 @bind-messageText="serviceName" />
+<!-- End Appointment Section -->
+<!-- ======= Departments Section ======= -->
+@*<section id="departments" class="departments">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Экспресс аудит по категории объекта НВОС</h2>
+            <p>Выберите категорию объекта НВОС к которой отнесено ваше предприятие и ознакомьтесь с перечнем необходимой экологической документации</p>
+        </div>
+
+        <div class="row gy-4">
+            <div class="col-lg-3">
+                <ul class="nav nav-tabs flex-lg-column flex-row">
+                    <li class="nav-item">
+                        <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">I категория</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#tab-2">II категория</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#tab-3">III категория</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#tab-4">IV категория</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Узнать категорию</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-9">
+                <div class="tab-content">
+                    <div class="tab-pane active show" id="tab-1">
+                        <div class="row gy-4">
+                            <div class="col-lg-8 details order-2 order-lg-1">
+                                <h3>Cardiology</h3>
+                                <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
+                                <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
+                            </div>
+                            <div class="col-lg-4 text-center order-1 order-lg-2">
+                                <img src="img/departments-1.jpg" alt="" class="img-fluid" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-2">
+                        <div class="row gy-4">
+                            <div class="col-lg-8 details order-2 order-lg-1">
+                                <h3>Et blanditiis nemo veritatis excepturi</h3>
+                                <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
+                                <p>Ea ipsum voluptatem consequatur quis est. Illum error ullam omnis quia et reiciendis sunt sunt est. Non aliquid repellendus itaque accusamus eius et velit ipsa voluptates. Optio nesciunt eaque beatae accusamus lerode pakto madirna desera vafle de nideran pal</p>
+                            </div>
+                            <div class="col-lg-4 text-center order-1 order-lg-2">
+                                <img src="img/departments-2.jpg" alt="" class="img-fluid" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-3">
+                        <div class="row gy-4">
+                            <div class="col-lg-8 details order-2 order-lg-1">
+                                <h3>Impedit facilis occaecati odio neque aperiam sit</h3>
+                                <p class="fst-italic">Eos voluptatibus quo. Odio similique illum id quidem non enim fuga. Qui natus non sunt dicta dolor et. In asperiores velit quaerat perferendis aut</p>
+                                <p>Iure officiis odit rerum. Harum sequi eum illum corrupti culpa veritatis quisquam. Neque necessitatibus illo rerum eum ut. Commodi ipsam minima molestiae sed laboriosam a iste odio. Earum odit nesciunt fugiat sit ullam. Soluta et harum voluptatem optio quae</p>
+                            </div>
+                            <div class="col-lg-4 text-center order-1 order-lg-2">
+                                <img src="img/departments-3.jpg" alt="" class="img-fluid" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-4">
+                        <div class="row gy-4">
+                            <div class="col-lg-8 details order-2 order-lg-1">
+                                <h3>Fuga dolores inventore laboriosam ut est accusamus laboriosam dolore</h3>
+                                <p class="fst-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
+                                <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam quia a laborum inventore</p>
+                            </div>
+                            <div class="col-lg-4 text-center order-1 order-lg-2">
+                                <img src="img/departments-4.jpg" alt="" class="img-fluid" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab-5">
+                        <div class="row gy-4">
+                            <div class="col-lg-8 details order-2 order-lg-1">
+                                <h3>Est eveniet ipsam sindera pad rone matrelat sando reda</h3>
+                                <p class="fst-italic">Omnis blanditiis saepe eos autem qui sunt debitis porro quia.</p>
+                                <p>Exercitationem nostrum omnis. Ut reiciendis repudiandae minus. Omnis recusandae ut non quam ut quod eius qui. Ipsum quia odit vero atque qui quibusdam amet. Occaecati sed est sint aut vitae molestiae voluptate vel</p>
+                            </div>
+                            <div class="col-lg-4 text-center order-1 order-lg-2">
+                                <img src="img/departments-5.jpg" alt="" class="img-fluid" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>*@
+<!-- End Departments Section -->
+<!-- ======= Experts Section ======= -->
+<section id="experts" class="experts section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Эксперты</h2>
+            <p>Свяжитесь с нами и получите консультацию прямо сейчас</p>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="member d-flex align-items-start">
+                    <div class="pic"><img src="img/experts/ecologist.jpg" class="img-fluid" alt="Ольга - Ведущий инженер-эколог" loading="lazy"></div>
+                    <div class="member-info">
+                        <h4>Ольга Владимировна</h4>
+                        <span class="position">Ведущий инженер-эколог</span>
+                        <p>Консультации по вопросам природоохранного законодательства</p>
+                        <div class="contacts">
+                            <a class="d-flex align-items-center text-decoration-none" href="@CitiesService.Get("mail_href", ContactDataClass.MailHref())?subject=Заявка%20в%20экологический%20отдел" data-bs-toggle="tooltip" data-bs-placement="top" title="@CitiesService.Get("mail", ContactDataClass.Mail())"><i class="icon-contact bi bi-envelope"></i><span class="d-none d-md-inline ms-2">@CitiesService.Get("mail", ContactDataClass.Mail())</span></a>
+                            <button type="button" class="btn p-0 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#diploma"><i class="icon-contact fas fa-user-graduate"></i><span class="ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Диплом инженера-эколога">диплом</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mt-4 mt-lg-0">
+                <div class="member d-flex align-items-start">
+                    <div class="pic"><img src="img/experts/manager.jpg" class="img-fluid" alt="Ярослав - Менеджер проектов" loading="lazy"></div>
+                    <div class="member-info">
+                        <h4>Ярослав Николаевич</h4>
+                        <span class="position">Менеджер проектов</span>
+                        <p class="text-wrap">Коммерческие и организационные вопросы на всех этапах сотрудничества</p>
+                        <div class="contacts">
+                            <a href="@CitiesService.Get("mail_href", ContactDataClass.MailHref())?subject=Заявка%20в%20коммерческий%20отдел" data-bs-toggle="tooltip" data-bs-placement="top" title="@CitiesService.Get("mail", ContactDataClass.Mail())"><i class="icon-contact bi bi-envelope"></i></a>
+                            <a href="@ContactDataClass.WhatsApp()" target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" title="Связаться по WhatsApp"><i class="icon-contact fa-brands fa-whatsapp"></i></a>
+                            <button type="button" class="shareButton btn p-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Поделиться ссылкой"><i class="icon-contact bi bi-share"></i></button>
+                            <a class="d-flex align-items-center" href="@CitiesService.Get("tel_href", ContactDataClass.PhoneHref())" data-bs-toggle="tooltip" data-bs-placement="top" title="@CitiesService.Get("tel", ContactDataClass.Phone())"><i class="icon-contact bi bi-phone"></i><span class="d-none d-md-inline ms-2 text-nowrap">@CitiesService.Get("tel", ContactDataClass.Phone())</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- ======= Modal window Diploma ======= -->
+    <div class="modal fade" id="diploma" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Диплом инженера-эколога</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="img/experts/diploma.webp" alt="Диплом инженера-эколога" class="img-fluid" loading="lazy">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal window Diploma -->
+</section>
+<!-- End Experts Section -->
+<!-- ======= Frequently Asked Questions Section ======= -->
+<section id="faq" class="faq section-bg section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Важно знать</h2>
+            <p>Несколько важных моментов с которыми следует ознакомиться перед сотрудничеством</p>
+        </div>
+
+        <div class="faq-list">
+            <ul>
+                <li data-aos="fade-up">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapsed" data-bs-target="#faq-list-1">Способы сотрудничества и форма оплаты<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-1" class="collapse" data-bs-parent=".faq-list">
+
+                        <p class="fw-bold">Заключение договора и обмен документами осуществляем следующими способами:</p>
+                        <p>- Электронный документооборот через <label class="d-inline" data-bs-toggle="modal" data-bs-target="#operatorsEDI">операторов ЭДО (более 27 сервисов)</label>.</p>
+                        <p>- Почтовые отправления по РФ.</p>
+                        <p>- Посетим ваш офис@(SubdomainService.IsSubdomain ? " " + CitiesService.Get("toponyms.in_dat") : "").</p>
+                        <p class="fw-bold">Оплата услуг осуществляется:</p>
+                        <p>- Безналичный перевод на расчетный счет Компании.</p>
+                        <p>- Перевод денежных средств на карту Сбербанка</p>
+                    </div>
+                </li>
+
+                <li data-aos="fade-up" data-aos-delay="100">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Регионы оказания экологических услуг<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+                        <p>Разработка природоохранной документации осуществляется для предприятий <strong>всех регионов России</strong>, на основании копий документов и исходных данных.</p>
+                        <p>Подготовка и согласование отчетной и иной экологической документации <strong>осуществляется Online</strong>, через сервисы Федеральной службы природопользования. Подпись документов осуществляется по средствам ЭЦП.</p>
+                    </div>
+                </li>
+
+                <li data-aos="fade-up" data-aos-delay="200">
+                    <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Выезд инженера-эколога на объект<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+                    <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+                        <p>При необходимости инженер-эколог осуществляет выезд на объект Заказчика для сбора исходных данных.</p>
+                        <p>Выезд инженера-эколога осуществляется по предварительной договоренности, на объекты расположенные в @(CitiesService.Get("toponyms.dat", "ЦФО") + (SubdomainService.IsSubdomain ? (" и " + CitiesService.Get("toponyms.gen_sg_f") + " области") : "")).</p>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- End Frequently Asked Questions Section -->
+<!-- ======= Modal Window EDI Providers ======= -->
+<noindex class="modal fade" id="operatorsEDI" tabindex="-1" aria-labelledby="operatorsEDILabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="operatorsEDILabel">Список операторов ЭДО</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+                <ol>
+                    <li>Контур.Диадок</li>
+                    <li>СберКорус (Сферакурьер)</li>
+                    <li>Э-Ком (Docrobot)</li>
+                    <li>ДИРЕКТУМ (Synerdocs)</li>
+                    <li>НТЦ СТЭК (СТЭК)</li>
+                    <li>Тензор (СБИС)</li>
+                    <li>Национальный удостоверяющий центр (СТЭК)</li>
+                    <li>Эдисофт (Edisoft)</li>
+                    <li>Такском (Файлер)</li>
+                    <li>ТаксНет (Транскрипт)</li>
+                    <li>Калуга-Астрал (Астрал Отчет)</li>
+                    <li>ФораПром (LeraData)</li>
+                    <li>УЦ ГИС (Транскрипт)</li>
+                    <li>КРИПТЭКС (Signatura)</li>
+                    <li>НИИАС(НИИАС)</li>
+                    <li>ИнфоТеКС Интернет Траст (ViPNet)</li>
+                    <li>СИСЛИНК (DOCLINK)</li>
+                    <li>Сервионика (i-Конто)</li>
+                    <li>Петер-Сервис Спецтехнологии (ЭДО.ПОТОК)</li>
+                    <li>ТЭК-Торг (ЭДО ТЭК-Торг)</li>
+                    <li>Электронный Экспресс (Гарант) (ЭДО ЭП)</li>
+                    <li>Финтендер-Крипто (Fintender-EDS)</li>
+                    <li>ЭТП ГПБ (Система ЭДО ЭТП ГПБ)</li>
+                    <li>ЦРПТ (ЭДО Лайт)</li>
+                    <li>Бифит (Бифит ЭДО)</li>
+                    <li>Русь-Телеком (Фельдъегерь: ЭДО)</li>
+                    <li>Платформа ЭДО (Эвотор ОФД)</li>
+                    <li>ПРОФИ Менеджер - тестирование</li>
+                    <li>МО ПНИЭИ-КрасКрипт - тестирование</li>
+                    <li>ДиСтэйт - тестирование</li>
+                </ol>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</noindex>
+<!-- End Modal Window EDI Providers -->
+<!-- ======= Clients Section ======= -->
+<section id="clients" class="clients section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Наши заказчики</h2>
+            <p>Они доверили нам разработку экологической документации</p>
+        </div>
+        <div class="clients-slider swiper" data-aos="fade-up" data-aos-delay="100">
+            <div class="swiper-wrapper">
+                @if (ShouldDisplayBlock("тула"))
+                {
+                    <div class="swiper-slide">
+                        <div class="client-wrap">
+                            <div class="client-item">
+                                <img src="img/clients/rgd.jpg" class="client-img" alt="Логотип РЖД, Тульский филиал" loading="lazy">
+                                <h3>Российские железные дороги</h3>
+                                <h4>Тульская дистанция пути</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Разработка проекта образования отходов и лимитов на их размещение, подготовка паспортов опасных отходов для АХЦ Московской железной дороги - филиала ОАО «РЖД» в г. Тула.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- End client item -->
+                @if (ShouldDisplayBlock("тула"))
+                {
+                    <div class="swiper-slide">
+                        <div class="client-wrap">
+                            <div class="client-item">
+                                <img src="img/clients/selgros.jpg" class="client-img" alt="Торговый комплекс Зельгрос в Туле" loading="lazy">
+                                <h3>SELGROS Cash &amp; Carry</h3>
+                                <h4>г. Тула</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Подготовка декларации по экологическому сбору: отчёт о выполнении нормативов товаров подлежащих утилизации, декларация о количестве товаров, расчёт экосбора.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- End client item -->
+                @if (ShouldDisplayBlock("тула"))
+                {
+                    <div class="swiper-slide">
+                        <div class="client-wrap">
+                            <div class="client-item">
+                                <img src="img/clients/fa.jpg" class="client-img" alt="Тульский филиал Финуниверситета" loading="lazy">
+                                <h3>Финансовый университет при Правительстве РФ</h3>
+                                <h4>Тульский филиал</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Разработка проекта образования отходов и лимитов на их размещение (ПНООЛР), подготовка паспортов опасных отходов и сведений для отходов 5 класса опасности.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- End client item -->
+                @if (ShouldDisplayBlock("тула"))
+                {
+                    <div class="swiper-slide">
+                        <div class="client-wrap">
+                            <div class="client-item">
+                                <img src="img/clients/tnb.png" class="client-img" alt="Сеть АЗС в Тульской области" loading="lazy">
+                                <h3>Сеть автозаправочных комплексов</h3>
+                                <h4>Тула и Тульская область</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Проведение инвентаризации источников выбросов ЗВ, разработка программы ПЭК, подготовка декларации о плате за НВОС, годовая отчётность, отработка предостережений РПН.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- End client item -->
+                @if (ShouldDisplayBlock("сочи"))
+                {
+                    <div class="swiper-slide">
+                        <div class="client-wrap">
+                            <div class="client-item">
+                                <img src="img/clients/ratko-mitrovic.jpg" class="client-img" alt="Строительная компания в г. Сочи" loading="lazy">
+                                <h3>Строительный холдинг «Ратко Митрович»</h3>
+                                <h4>Сочинский филиал</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Постановка на государственный учет объекта капиталього строительства - НВОС, проведение инвентаризации источников выбросов/образования отходов, подготовка отчетности.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- End client item -->
+                @if (ShouldDisplayBlock("москва"))
+                {
+                    <div class="swiper-slide">
+                        <div class="client-wrap">
+                            <div class="client-item">
+                                <img src="img/clients/monolit.jpg" class="client-img" alt="Компании Монолит Московская область" loading="lazy">
+                                <h3>Управляющая компания ООО «Монолит»</h3>
+                                <h4>Московская область</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Подготовка декларации о плате за НВОС, отчеты по формам 2-ТП отходы, 2-ТП воздух, отчет об организации и о результатах осуществления ПЭК.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- End client item -->
+                @if (ShouldDisplayBlock("липецк"))
+                {
+                    <div class="swiper-slide">
+                        <div class="client-wrap">
+                            <div class="client-item">
+                                <img src="img/clients/experimental-farm.jpg" class="client-img" alt="Опытное хозяйство в Липецкой области" loading="lazy">
+                                <h3>ООО «Опытное хозяйство»</h3>
+                                <h4>Липецкая область</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Подготовка декларации о плате за негативное воздействие на окружающую среду, проведение инвентаризации источников выбросов загрязняющих веществ.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- End client item -->
+                @if (ShouldDisplayBlock("тула"))
+                {
+                    <div class="swiper-slide">
+                        <div class="client-wrap">
+                            <div class="client-item">
+                                <img src="img/clients/letual.jpg" class="client-img" alt="Сеть магазинов ЛЭТУАЛЬ" loading="lazy">
+                                <h3>Сеть магазинов ЛЭТУАЛЬ</h3>
+                                <h4>г. Тула</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Разработка ПНООЛР, подготовка паспортов опасных отходов/сведения об отходах, зарегистрированных в ФККО. Подготовка декларации о плате за НВОС, отчётность 2-ТП отходы.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- End client item -->
+                @if (ShouldDisplayBlock("тула калуга"))
+                {
+                    <div class="swiper-slide">
+                        <div class="client-wrap">
+                            <div class="client-item">
+                                <img src="img/clients/magnit.png" class="client-img" alt="Магазины Магнит" loading="lazy">
+                                <h3>Сеть магазинов Магнит</h3>
+                                <h4>г. Тула, г. Калуга</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Разработка проектов образования отходов и лимитов на их размещение для магазинов Магнит, Гипермаркетов, логистического центра в г. Тула.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- End client item -->
+                @if (ShouldDisplayBlock("тула"))
+                {
+                    <div class="swiper-slide">
+                        <div class="client-wrap">
+                            <div class="client-item">
+                                <img src="img/clients/wastewater-treatment.jpg" class="client-img" alt="Водоканализационное хозяйство Тульской области" loading="lazy">
+                                <h3>Водоканализационное хозяйство</h3>
+                                <h4>г. Суворов, Тульской области</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                    Подготовка документов на предоставление водного объекта в пользование, постановка на государственный учет объекта НВОС, подготовка декларации о плате за НВОС, отчет ПЭК.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- End client item -->
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+<!-- End Clients Section -->
+<!-- ======= Gallery Section ======= -->
+<section class="gallery section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Мы на объектах</h2>
+            <p>Выезд инженера-эколога на объекты НВОС при сборе исходных данных</p>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row g-0">
+            <div class="col-lg-3 col-md-6 gallery-item">
+                <img src="img/gallery/factory.webp" alt="Завод, сбор данных при разработке НДВ" class="img-fluid" loading="lazy">
+            </div>
+            <div class="col-lg-3 col-md-6 gallery-item">
+                <img src="img/gallery/azs.webp" alt="Посещение объекта АЗС при разработке инвентаризации ИЗАВ. Тульская область." class="img-fluid" loading="lazy">
+            </div>
+            <div class="col-lg-3 col-md-6 gallery-item">
+                <img src="img/gallery/boiler-house.webp" alt="Выезд инженера-эколога на объект котельной при сборе исходных данных. г. Тула." class="img-fluid" loading="lazy">
+            </div>
+            <div class="col-lg-3 col-md-6 gallery-item">
+                <img src="img/gallery/tula-branch-rgd.webp" alt="Тульский филиал ОАО РЖД - ивентаризация отходов" class="img-fluid" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Gallery Section -->
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Контакты</h2>
+            <p>Опишите задачу которую необходимо выполнить</p>
+        </div>
+    </div>
+    @*<div>
+    <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
+    </div>*@
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-lg-4">
+                <div class="info">
+                    <div class="address">
+                        <i class="bi bi-geo-alt"></i>
+                        <p class="h_4">Почтовый адрес:</p>
+                        <p class="item">@ContactDataClass.AddressLetter()</p>
+                    </div>
+                    <div class="email">
+                        <i class="bi bi-envelope"></i>
+                        <p class="h_4">Email:</p>
+                        <a class="item" href="@CitiesService.Get("mail_href", ContactDataClass.MailHref())">@CitiesService.Get("mail", ContactDataClass.Mail())</a>
+                    </div>
+                    <div class="phone">
+                        <i class="bi bi-phone"></i>
+                        <p class="h_4">Телефон:</p>
+                        <a class="item" href="@CitiesService.Get("tel_href", ContactDataClass.PhoneHref())">@CitiesService.Get("tel", ContactDataClass.Phone())</a>
+                    </div>
+                </div>
+            </div>
+            <ContactForm2 />
+        </div>
+    </div>
+</section>
+<!-- End Contact Section -->
+@code {
+
+    // Отнесение проектов по поддоменам
+    private bool ShouldDisplayBlock(string allowedSubdomains)
+    {
+        return !SubdomainService.IsSubdomain || allowedSubdomains.Contains(SubdomainService.Subdomain);
+    }
+
+
+    private bool servicesVisible = false;
+
+    private void ShowServices()
+    {
+        servicesVisible = true;
+    }
+
+    private string? serviceName;
+    private string? SearchServiceInput { get; set; }
+    private string[] Services = new string[]
+    {
+        "Кадастр отходов",
+        "Разработка КЭР",
+        "Паспорт ГОУ",
+        "Инвентаризация ИЗАВ",
+        "Мероприятия при НМУ",
+        "Отработать предписание РПН",
+        "Декларация о воздействии",
+        "Инструкция по обращению с отходами"
+    };
+
+    private void AddServiceToInput(string service)
+    {
+        if (string.IsNullOrWhiteSpace(SearchServiceInput))
+        {
+            SearchServiceInput = service;
+        }
+        else
+        {
+            SearchServiceInput += $", {service}";
+        }
+    }
+
+    //async Task
+    private async Task GetPrice()
+    {
+        if (string.IsNullOrWhiteSpace(SearchServiceInput))
+        {
+            return;
+        }
+
+        SearchServiceInput = SearchServiceInput.Trim();
+
+        serviceName = (string.IsNullOrWhiteSpace(serviceName)) ? SearchServiceInput : serviceName.Trim() + ", " + SearchServiceInput;
+        SearchServiceInput = "";
+
+        // Вызываем метод прокрутки к якорю #appointment
+        await JSRuntime.InvokeVoidAsync("BlazorScrollToId", "appointment");
+        await JSRuntime.InvokeVoidAsync("moveValue");
+    }
+
+}

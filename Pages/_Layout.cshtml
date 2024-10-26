@@ -1,0 +1,72 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@using Ecoplaza.Data
+@namespace Ecoplaza.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SubdomainService SubdomainService
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="all">
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+    <meta name="copyright" content="@(SubdomainService.IsSubdomain ? CitiesService.Get("toponyms.nom").ToLower() + "." : "")@ContactDataClass.URLshort(), @ContactDataClass.CopyrightYears(). Все права защищены." />
+    <base href="~/" />
+    @*Favicons*@
+    <link href="img/favicon.svg" rel="icon">
+    <link href="img/favicon.svg" rel="apple-touch-icon">
+    @*Google Fonts*@
+    @*<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">*@
+    @*Lib CSS Files*@
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    @*Bundle CSS files*@
+    <link href="css/bundle.min.css" rel="stylesheet" />
+    @*Component CSS files*@
+    <link href="Ecoplaza.styles.css" rel="stylesheet" />
+
+</head>
+<body class="page">
+    @RenderBody()
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            Произошла ошибка. Это приложение может перестать отвечать на запросы, пока не будет перезагружено.
+        </environment>
+        <environment include="Development">
+            Произошло необработанное исключение. Подробности см. в разделе Инструменты разработчика браузера.
+        </environment>
+        <a href="" class="reload">Перезагрузить</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <noscript>
+        <p>Ваш браузер не поддерживает JavaScript или поддержка отключена в настройках.</p>
+        <!-- Yandex.Metrika counter -->
+        <div><img src="https://mc.yandex.ru/watch/83424763" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <script defer type="text/javascript">
+        // Anchor Navigation Script
+        function BlazorScrollToId(n) { const t = document.getElementById(n); if (t instanceof HTMLElement) { const n = window.pageYOffset || document.documentElement.scrollTop, i = t.getBoundingClientRect().top + n, r = i - 70; window.scrollTo({ top: r, behavior: "smooth" }) } }
+        // Yandex.Metrika counter
+        (function (m, e, t, r, i, k, a) { m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) }; m[i].l = 1 * new Date(); for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } } k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a) })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(83424763, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true, trackHash: true });
+    </script>
+
+    <!-- Lib JS Files -->
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js" async></script>
+
+    <!-- Template Main JS File -->
+    <script src="js/bundle.min.js" defer></script>
+    @*<script src="js/test.js"></script>*@
+    <script src="_framework/blazor.server.js" async></script>
+    <script src="lib/swiper/swiper-bundle.min.js" defer></script>
+    @*Lib Icons CSS Files*@
+    <link rel="preload" href="lib/fontawesome-free/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="lib/bootstrap-icons/bootstrap-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="lib/boxicons/css/boxicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="lib/swiper/swiper-bundle.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+</body>
+</html>

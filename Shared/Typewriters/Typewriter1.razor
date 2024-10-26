@@ -1,0 +1,35 @@
+﻿@using System.Timers
+
+@displayText
+
+@code {
+    private string fullText = "Удобное сотрудничество через ЭДО, почту или с выездом эколога на объект."; // Печатаемый текст
+    private string displayText = ""; // Существующий текст
+    private Timer timer;
+
+    protected override void OnInitialized()
+    {
+        StartTypingEffect();
+    }
+
+    private void StartTypingEffect()
+    {
+        int index = 0;
+        timer = new Timer(100); // Интервал в миллисекундах между "набором" символов
+        timer.Elapsed += (sender, e) =>
+        {
+            if (index < fullText.Length)
+            {
+                displayText += fullText[index];
+                index++;
+                InvokeAsync(StateHasChanged); // Обновление UI
+            }
+            else
+            {
+                timer.Stop();
+                timer.Dispose();
+            }
+        };
+        timer.Start();
+    }
+}

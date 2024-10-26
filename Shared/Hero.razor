@@ -1,0 +1,62 @@
+﻿@inject NavigationManager MyNavigationManager
+@using Ecoplaza.Data
+@inject SubdomainService SubdomainService
+
+@if (MainPage)
+{
+    <section id="hero" class="d-flex align-items-center">
+        <div class="container">
+            <h1>@($"Экологические услуги {CitiesService.Get("toponyms.in_dat", "под ключ")}")</h1>
+            <p>@($"Разработка и согласование документации{(SubdomainService.IsSubdomain ? " под ключ" : "")}")</p>
+            <a href="#services" class="btn btn-primary btn-get-started scrollto">Заказать услугу</a>
+        </div>
+    </section>
+}
+
+@code {
+    private bool MainPage;
+
+    protected override void OnInitialized()
+    {
+        // Подписываемся на событие изменения локации
+        MyNavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+    {
+        // Проверяем, находимся ли мы на главной странице при каждом изменении URL
+        SetMainPage();
+        InvokeAsync(StateHasChanged); // Обновляем состояние компонента
+    }
+
+    protected override void OnParametersSet()
+    {
+        SetMainPage(); // Проверка на главную страницу
+    }
+
+    private void SetMainPage()
+    {
+        // Проверяем на главную страницу (Проверка на параметры, якорные ссылки, повторный слеш)
+        string url = MyNavigationManager.ToBaseRelativePath(MyNavigationManager.Uri);
+        MainPage = string.IsNullOrWhiteSpace(url) || url.StartsWith("?") || url.StartsWith("#") || url == "/";
+    }
+
+    public void Dispose()
+    {
+        // Отписываемся от события изменения локации при уничтожении компонента
+        MyNavigationManager.LocationChanged -= OnLocationChanged;
+    }
+
+    // Старый вариант - работает с ошибкой
+    //protected override void OnParametersSet()
+    //{
+    // Проверяем на главную страницу (Проверка на параметры, якорные ссылки, повторный слеш)
+    //string url = MyNavigationManager.ToBaseRelativePath(MyNavigationManager.Uri);
+    //MainPage = string.IsNullOrWhiteSpace(url) || url.StartsWith("?") || url.StartsWith("#") || url == "/";
+
+    // Проверяем на конкретную страницу
+    //    ContactPage = MyNavigationManager.ToBaseRelativePath(MyNavigationManager.Uri).Contains("contact");
+    //}
+
+    //}
+}

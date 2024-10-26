@@ -1,0 +1,97 @@
+/*--------------------------------------------------------------
+# Breadcrumbs
+--------------------------------------------------------------*/
+.breadcrumbs[b-3wjratfxsf] {
+    padding: 20px 0;
+    background-color: #f1f7fd;
+    min-height: 40px;
+    margin-top: 120px;
+}
+
+    .breadcrumbs h2[b-3wjratfxsf] {
+        font-size: 24px;
+        font-weight: 300;
+        margin: 0;
+    }
+
+    .breadcrumbs .subdivisions a[b-3wjratfxsf] {
+        padding: 8px 10px;
+    }
+
+        .breadcrumbs .subdivisions a.active[b-3wjratfxsf] {
+            color: var(--contrast-color);
+            background-color: var(--accent-color);
+        }
+
+        .breadcrumbs .subdivisions a:hover[b-3wjratfxsf] {
+            color: var(--accent-color);
+            background-color: transparent;
+            transition: .3s;
+        }
+
+    .breadcrumbs .subdivisions a[b-3wjratfxsf] {
+        color: inherit;
+    }
+
+    .breadcrumbs strong[b-3wjratfxsf] {
+        font-weight: 600;
+        font-size: .98em;
+    }
+
+    .breadcrumbs ol[b-3wjratfxsf] {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+    }
+
+        .breadcrumbs ol li:not(ul li) + li[b-3wjratfxsf] {
+            padding-left: 6px;
+        }
+
+        .breadcrumbs ol li:not(ul li) + li[b-3wjratfxsf]::before {
+            display: inline-block;
+            padding-right: 6px;
+            color: #6c757d;
+            content: "/";
+        }
+
+@media (max-width: 1399.98px) {
+    .breadcrumbs .d-flex[b-3wjratfxsf] {
+        display: block !important;
+    }
+
+    .breadcrumbs h2[b-3wjratfxsf], .breadcrumbs .subdivisions[b-3wjratfxsf] {
+        margin: 0 0 15px 0;
+    }
+
+        .breadcrumbs .subdivisions a[b-3wjratfxsf] {
+            padding: 6px 8px;
+            font-size: .9em;
+        }
+}
+
+@media (max-width: 767.98px) {
+    .breadcrumbs h2[b-3wjratfxsf], .breadcrumbs .subdivisions[b-3wjratfxsf] {
+        margin: 0 0 10px 0;
+    }
+
+        .breadcrumbs .subdivisions a[b-3wjratfxsf] {
+            padding: 3px 6px;
+            font-size: .8em;
+        }
+
+    .breadcrumbs h2[b-3wjratfxsf] {
+        font-size: 1.25em;
+    }
+
+    .breadcrumbs ol[b-3wjratfxsf] {
+        display: block;
+    }
+
+        .breadcrumbs ol li:not(ul li)[b-3wjratfxsf] {
+            display: inline-block;
+        }
+}

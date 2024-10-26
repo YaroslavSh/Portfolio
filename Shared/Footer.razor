@@ -1,0 +1,73 @@
+﻿@using Ecoplaza.Data
+@inject SubdomainService SubdomainService
+
+<footer id="footer">
+
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6 footer-contact">
+                    <h3>@ContactDataClass.Brand()</h3>
+                    <p>
+                        @ContactDataClass.LegalEntity()<br>
+                        ОГРНИП: @ContactDataClass.DetailsOGRN()<br>
+                        @(SubdomainService.IsSubdomain ? "г. " + CitiesService.Get("toponyms.nom") + ", " + CitiesService.Get("address_street") : "Зарегистрирован в " + ContactDataClass.AddressShrot())<br>
+                        Телефон: <a href="@CitiesService.Get("tel_href", ContactDataClass.PhoneHref())">@CitiesService.Get("tel", ContactDataClass.Phone())</a><br>
+                        @CitiesService.Get("open_hours", ContactDataClass.OpenHours())<br>
+                        Email: <a href="@CitiesService.Get("mail_href", ContactDataClass.MailHref())">@CitiesService.Get("mail", ContactDataClass.Mail())</a>
+                    </p>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-links">
+                    <h4>О компании</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="/">Главная</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Реквизиты</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Контакты</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Соискателям</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Персональные данные</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Услуги</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Экологическое проектирование</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Экологическое сопровождение</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Декларация о плате за НВОС</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Постановка на учет ОНВОС</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Экологическая отчетность</a></li>
+                    </ul>
+                </div>
+
+                <ContactForm3 />
+
+                <ContactFormAppointment />
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container d-md-flex py-4">
+
+        <div class="me-md-auto text-center text-md-start">
+            <div class="copyright">
+                &copy; @ContactDataClass.CopyrightYears() <strong><a href="/">@ContactDataClass.URLshort()</a></strong>. Все&#160;права&#160;защищены.
+            </div>
+            <div class="credits">
+                Создание и продвижение сайтов <a href="https://digisfera.ru">digisfera.ru</a>
+            </div>
+        </div>
+        <div class="social-links text-center text-md-right pt-3 pt-md-0">
+            <a href="@ContactDataClass.Skype()" target="_blank" class="item"><i class="bx bxl-skype"></i></a>
+            <a href="@ContactDataClass.Telegram()" target="_blank" class="item"><i class="bx bxl-telegram"></i></a>
+            <a href="@ContactDataClass.WhatsApp()" target="_blank" class="item"><i class="icon-contact fa-brands fa-whatsapp"></i></a>
+            <button type="button" class="shareButton item"><i class="bi bi-share"></i></button>
+        </div>
+    </div>
+</footer>
+
+@code {
+
+}

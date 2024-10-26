@@ -1,0 +1,120 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Ecoplaza
+build_property.RootNamespace = Ecoplaza
+build_property.ProjectDir = C:\Users\user\Desktop\Portfolio\Ecoplaza\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\user\Desktop\Portfolio\Ecoplaza
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Pages/_LayoutService.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dFNlcnZpY2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Pages/Пдв.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNc0J/QtNCyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/AnchorNavigation.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFuY2hvck5hdmlnYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/Canonical.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENhbm9uaWNhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/Cities.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENpdGllcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/ContactForms/ContactForm1.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbnRhY3RGb3Jtc1xDb250YWN0Rm9ybTEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/ContactForms/ContactForm2.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbnRhY3RGb3Jtc1xDb250YWN0Rm9ybTIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/ContactForms/ContactForm3.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbnRhY3RGb3Jtc1xDb250YWN0Rm9ybTMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/ContactForms/ContactFormAppointment.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbnRhY3RGb3Jtc1xDb250YWN0Rm9ybUFwcG9pbnRtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/Footer.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEZvb3Rlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/Header.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEhlYWRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/Hero.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEhlcm8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/JsIntegrator.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEpzSW50ZWdyYXRvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/TopBar.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFRvcEJhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/Typewriters/Typewriter1.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFR5cGV3cml0ZXJzXFR5cGV3cml0ZXIxLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/Breadcrumbs.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEJyZWFkY3J1bWJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-3wjratfxsf
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-l16iuclr8u
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-o0c2mzob59
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/Desktop/Portfolio/Ecoplaza/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

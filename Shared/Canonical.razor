@@ -1,0 +1,131 @@
+﻿@using System.Reflection
+@using System.Globalization;
+
+@inject NavigationManager Navigation
+
+@*Компонент вставляет в качестве канонической ссылки первый маршрут, указанный в директиве page на странице*@
+
+@code {
+    [Parameter]
+    public Type? PageType { get; set; }
+
+    private string? canonicalUrl;
+
+    protected override void OnParametersSet()
+    {
+        // Получаем текущий URI
+        var currentUri = new Uri(Navigation.Uri);
+
+        // Извлекаем хост (домен и поддомен)
+        var host = currentUri.Host;
+
+        // Преобразуем хост в Punycode (если латиница - вернет тоже самое)
+        var idn = new IdnMapping();
+        string punycodeHost = idn.GetAscii(host);
+
+        if (PageType != null)
+        {
+            // Получаем все маршруты
+            var routeAttributes = PageType
+                .GetCustomAttributes(typeof(Microsoft.AspNetCore.Components.RouteAttribute), false)
+                .Cast<Microsoft.AspNetCore.Components.RouteAttribute>();
+
+            // Выбираем первый маршрут
+            var route = routeAttributes.FirstOrDefault();
+            if (route != null)
+            {
+                // Проверяем, является ли маршрут главным "/"
+                if (route.Template == "/")
+                {
+                    canonicalUrl = $"https://{punycodeHost}";
+                }
+                else
+                {
+                    // Разделяем путь на сегменты и кодируем только те, которые содержат не-ASCII символы
+                    var segments = route.Template.Split('/');
+                    for (int i = 0; i < segments.Length; i++)
+                    {
+                        if (!string.IsNullOrEmpty(segments[i]) && segments[i].Any(c => c > 127))
+                        {
+                            segments[i] = Uri.EscapeDataString(segments[i]);
+                        }
+                    }
+
+                    // Объединяем сегменты обратно в путь, не кодируя слеши
+                    string encodedPath = string.Join("/", segments);
+
+                    // Формируем канонический URL с жестко заданным протоколом https
+                    canonicalUrl = $"https://{punycodeHost}/{encodedPath.TrimStart('/')}";
+                }
+            }
+        }
+    }
+}
+
+@if (!string.IsNullOrEmpty(canonicalUrl))
+{
+    <link rel="canonical" href="@canonicalUrl" />
+}
+
+
+
+
+
+@*@code {
+    [Parameter]
+    public Type? PageType { get; set; }
+
+    private string? canonicalUrl;
+
+    protected override void OnParametersSet()
+    {
+        // Получаем текущий URI
+        var currentUri = new Uri(Navigation.Uri);
+
+        // Извлекаем хост (домен и поддомен)
+        var host = currentUri.Host;
+
+        // Преобразуем хост в Punycode (если латиница - вернет тоже самое)
+        var idn = new IdnMapping();
+        string punycodeHost = idn.GetAscii(host);
+
+        if (PageType != null)
+        {
+            // Получаем все маршруты
+            var routeAttributes = PageType
+                .GetCustomAttributes(typeof(Microsoft.AspNetCore.Components.RouteAttribute), false)
+                .Cast<Microsoft.AspNetCore.Components.RouteAttribute>();
+
+            // Выбираем первый маршрут
+            var route = routeAttributes.FirstOrDefault();
+            if (route != null)
+            {
+                // Разделяем путь на сегменты и кодируем только те, которые содержат не-ASCII символы
+                var segments = route.Template.Split('/');
+                for (int i = 0; i < segments.Length; i++)
+                {
+                    if (!string.IsNullOrEmpty(segments[i]) && segments[i].Any(c => c > 127))
+                    {
+                        segments[i] = Uri.EscapeDataString(segments[i]);
+                    }
+                }
+
+                // Объединяем сегменты обратно в путь, не кодируя слеши
+                string encodedPath = string.Join("/", segments);
+
+                // Формируем канонический URL с жестко заданным протоколом https
+                canonicalUrl = $"https://{punycodeHost}/{encodedPath.TrimStart('/')}";
+            }
+        }
+    }
+}
+
+@if (!string.IsNullOrEmpty(canonicalUrl))
+{
+    <link rel="canonical" href="@canonicalUrl" />
+}*@
+
+@*Альтернативный способ поиска путей
+var route = this.GetType()
+.GetCustomAttributes<Microsoft.AspNetCore.Components.RouteAttribute>(false)
+.FirstOrDefault();*@

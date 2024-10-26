@@ -1,0 +1,4 @@
+﻿User-agent: *
+Disallow: /*?
+Host: https://xn----etbbgaqbdkdhh4ab2ce7ac0e2f.xn--p1ai
+Sitemap: https://xn----etbbgaqbdkdhh4ab2ce7ac0e2f.xn--p1ai/sitemap.xml

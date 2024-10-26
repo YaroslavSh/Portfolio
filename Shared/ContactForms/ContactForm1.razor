@@ -1,0 +1,243 @@
+﻿@using System.Text.RegularExpressions
+@using System.Globalization
+@using MimeKit
+@inject NavigationManager Navigation
+
+<section id="appointment" class="appointment section-bg">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Форма заказа</h2>
+            <p>Запросите коммерческое предложение или задайте вопрос экологу</p>
+        </div>
+
+        <form class="email-form">
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <input type="text" @bind="senderName" @onfocus="HideErrorMessage" class="form-control @(IsNameValid ? "" : "error-light")" placeholder="Ваше имя*">
+                </div>
+                <div class="col-md-4 form-group mt-3 mt-md-0">
+                    <input type="email" @bind="senderEmail" @onfocus="HideErrorMessage" class="form-control @(IsEmailValid ? "" : "error-light")" placeholder="Ваш Email*">
+                </div>
+                <div class="col-md-4 form-group mt-3 mt-md-0">
+                    <input type="tel" @bind="senderPhone" @onfocus="HideErrorMessage" class="form-control @(IsPhoneValid ? "" : "error-light")" placeholder="Телефон с кодом города">
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <textarea id="messageServiceInput" @bind="messageText" @oninput="OnMessageTextChanged" @onfocus="HideErrorMessage" class="form-control @(IsMessageValid ? "" : "error-light")" rows="5" placeholder="Ваше сообщение*"></textarea>
+            </div>
+            <em>Заполняя форму обратной связи вы соглашаетесь на обработку указанных в ней персональных данных</em>
+            <div class="my-3">
+
+                @if (string.IsNullOrEmpty(errorMessage) && string.IsNullOrEmpty(successMessage))
+                {
+                    <div class="text-center">
+                        @if (isSending)
+                        {
+                            <div class="loading">Отправка сообщения...</div>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-primary" @onclick="SendMessage">@ButtonText</button>
+                        }
+                    </div>
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(errorMessage))
+                    {
+                        <div class="error-message">@errorMessage</div>
+                    }
+                    else if (!string.IsNullOrEmpty(successMessage))
+                    {
+                        <div class="sent-message">@successMessage</div>
+                    }
+                }
+
+            </div>
+
+        </form>
+
+    </div>
+</section>
+
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        var uri = new Uri(Navigation.Uri);
+        var idn = new IdnMapping();
+        host = idn.GetUnicode(uri.Host);
+    }
+
+    [Parameter]
+    public string? messageText { get; set; }
+
+    [Parameter]
+    public EventCallback<string> MessageTextChanged { get; set; }
+
+
+    private async Task OnMessageTextChanged(ChangeEventArgs e)
+    {
+        // Обновление значения messageText
+        messageText = e.Value.ToString();
+
+        // Вызов события messageTextChanged
+        await MessageTextChanged.InvokeAsync(messageText);
+    }
+
+    private string? host;
+    private string? senderName;
+    private string? senderEmail;
+    private string? senderPhone;
+    //private string? messageText;
+    private string? errorMessage;
+    private string? successMessage;
+    private bool isSending;
+    private bool IsNameValid = true;
+    private bool IsEmailValid = true;
+    private bool IsPhoneValid = true;
+    private bool IsMessageValid = true;
+    private string ButtonText = "Отправить сообщение";
+
+    private async Task SendMessage()
+    {
+        // Проверка валидности данных
+        bool isValid = ValidateData();
+        StateHasChanged(); // Обновление интерфейса
+
+        if (isValid)
+        {
+            // Показываем сообщение о загрузке
+            isSending = true;
+
+            try
+            {
+                // Выполняем код в фоновом потоке
+                await Task.Run(async () =>
+            {
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress(host ?? "Сайт", ContactDataClass.EmailTo()));
+                message.To.Add(new MailboxAddress(ContactDataClass.Brand(), ContactDataClass.EmailTo()));
+                message.ReplyTo.Add(new MailboxAddress(senderName, senderEmail));
+                message.Subject = MessageIdentiti();
+                message.Body = new TextPart("plain") { Text = messageText + "\r\n--\r\n" + senderName + (!string.IsNullOrEmpty(senderPhone) ? "\r\n" + senderPhone : "") + (!string.IsNullOrEmpty(senderEmail) ? "\r\n" + senderEmail : "") };
+
+                using (var client = new MailKit.Net.Smtp.SmtpClient())
+                {
+                    // Указываем учетные данные для аутентификации
+                    client.Connect(ContactDataClass.Host(), ContactDataClass.Port(), ContactDataClass.Ssl());
+                    client.Authenticate(ContactDataClass.UserName(), ContactDataClass.Password());
+
+                    // Отправляем сообщение
+                    await client.SendAsync(message); // Используем асинхронный метод для отправки
+                    client.Disconnect(true);
+                }
+
+                // Очистить все поля и показать сообщение об успешной отправке
+                senderName = senderEmail = senderPhone = messageText = "";
+
+                // Изменяем текст кнопки
+                ButtonText = "Отправить ещё";
+
+            });
+
+                // Показать сообщение об успешной отправке
+                successMessage = "Ваше сообщение доставлено";
+                StateHasChanged(); // Обновление интерфейса
+
+                // Задержка перед скрытием сообщения об успешной отправке
+                Task.Delay(2200).Wait();
+                successMessage = "Мы свяжемся с вами в ближайшее время";
+                StateHasChanged(); // Обновление интерфейса
+
+                // Задержка перед скрытием сообщения об успешной отправке
+                Task.Delay(2200).Wait();
+
+                // Скрыть сообщение об успешной отправке
+                successMessage = "";
+
+            }
+            catch (Exception ex)
+            {
+                // В случае ошибки, отобразить сообщение об ошибке
+                errorMessage = "Ошибка при отправке сообщения. Попробуйте еще раз";
+
+                // Очистить сообщение об ошибке через 3 секунды
+                // await Task.Delay(3000);
+                Task.Delay(3000).Wait();
+                HideErrorMessage();
+
+                // Вывести информацию об ошибке в консоль для отладки
+                // Console.WriteLine($"Ошибка при отправке сообщения: {ex.Message}");
+            }
+            finally
+            {
+                // Показать кнопку снова после завершения отправки
+                isSending = false;
+            }
+
+        }
+    }
+
+    private bool ValidateData()
+    {
+        if (string.IsNullOrWhiteSpace(senderName) || string.IsNullOrWhiteSpace(messageText) || string.IsNullOrWhiteSpace(senderEmail))
+        {
+            errorMessage = "Заполните обязательные поля (*)";
+            return false;
+        }
+
+        // Проверка длины имени
+        if (senderName.Length < 2)
+        {
+            errorMessage = "Это непохоже на имя";
+            return IsNameValid = false;
+        }
+
+        // Проверка корректности email адреса
+        if (!ValidationHelper.IsValidEmail(senderEmail))
+        {
+            errorMessage = "Укажите корректный e-mail";
+            return IsEmailValid = false;
+        }
+
+        // Проверка корректности номера телефона
+        if (!string.IsNullOrWhiteSpace(senderPhone) && !ValidationHelper.IsValidPhoneNumber(senderPhone))
+        {
+            errorMessage = "Укажите корректный номер телефона";
+            return IsPhoneValid = false;
+        }
+
+        // Проверка количества слов в сообщении
+        if (messageText.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length < 2)
+        {
+            errorMessage = "Сообщение недостаточно информативно";
+            return IsMessageValid = false;
+        }
+
+        // Все проверки пройдены успешно
+        HideErrorMessage(); // Очищаем сообщение об ошибке
+        return true;
+
+    }
+
+    private void HideErrorMessage()
+    {
+        errorMessage = "";
+        IsNameValid = IsEmailValid = IsPhoneValid = IsMessageValid = true;
+    }
+
+    //  Генерирование идентификатора в формате времени
+    private string MessageIdentiti()
+    {
+        DateTime now = DateTime.Now;
+        // Форматируем дату и время в требуемом формате
+        string requestId = $"Заявка от {now:dd.MM.yyyy HH:mm:ss}";
+        return requestId;
+    }
+
+
+}
